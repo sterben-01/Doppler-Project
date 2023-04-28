@@ -1,11 +1,7 @@
 #ifndef __COMMAND_PROCESS_HELPER_H__
 #define __COMMAND_PROCESS_HELPER_H__
 
-#include <string>
-#include <sstream>
-#include <vector>
-#include <iostream>
-#include <unistd.h>
+#include "CommonHeaders.h"
 /*
 Helper class for execute the command.
 This is a singleton class.
@@ -21,21 +17,10 @@ struct CommandProcessHelper{
                                 const std::vector<std::string>& filename_storage,
                                 const std::vector<std::string>& user_color_storage,
                                 int num_of_layer);
-    void Command_SetMain(int filename_storage_index); //do -layers-set-main
-    void Command_AddAnat(int filename_storage_index); //do -layers-add-anat
-    void Command_SetColorMap(int color_map_index); //do -props-set-colormap
-
-    void Command_CreateNewWorkSpaceFile(); //do -o and save
 
     int Command_Execute(); //execute command
-
     void Command_Serialize(); //serialize command
 
-    const std::string&              _filename;
-    const std::vector<std::string>& _filename_storage;
-    const std::vector<std::string>& _user_color_storage;
-    int _num_of_layer;
-    std::stringstream _ss;
 
     private:
     CommandProcessHelper(   const std::string& filename, 
@@ -61,6 +46,17 @@ struct CommandProcessHelper{
     bool Command_CheckFileExistance(const std::string& filename);
     void Serialize_ColorEmpty(); //for user has no color preference
     void Serialize_ColorNotEmpty(); //for user has color preference
+    void Command_SetMain(int filename_storage_index); //do -layers-set-main
+    void Command_AddAnat(int filename_storage_index); //do -layers-add-anat
+    void Command_SetColorMap(int color_map_index); //do -props-set-colormap
+    void Command_CreateNewWorkSpaceFile(); //do -o and save
+
+
+    const std::string&              _filename;
+    const std::vector<std::string>& _filename_storage;
+    const std::vector<std::string>& _user_color_storage;
+    int _num_of_layer;
+    std::stringstream _ss;
 
 };
 
